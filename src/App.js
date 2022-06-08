@@ -14,6 +14,7 @@ function App() {
 
   const [fullLink, setFullLink] = useState("");
   const [shortLink, setShortLink] = useState("");
+  const [copySuccess, setCopySuccess] = useState('');
 
   const getShortLink = () => {
     console.log("getShortLink");
@@ -34,6 +35,10 @@ function App() {
     console.log(fullLink);
   };
 
+  function copyToClipboard(e) {
+    navigator.clipboard.writeText(shortLink);
+    setCopySuccess('Copied!');
+  };
 
 
 
@@ -54,7 +59,11 @@ function App() {
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Short Link</Form.Label>
         <Form.Control type="text" placeholder="get short link here" value={shortLink} /*readOnly*/ />
-
+        <div>
+          <button onClick={copyToClipboard}>Copy</button> 
+          {copySuccess}
+        </div>
+        
       </Form.Group>
 
 
